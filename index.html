@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>Speech-dependent Data Augmentation for Own Voice Reconstruction with Hearable Microphones in Noisy Environments</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<div>
+<h1>
+Speech-dependent Data Augmentation for Own Voice Reconstruction with Hearable Microphones in Noisy Environments</h1>
+<p>
+Mattes Ohlenbusch, Christian Rollwage, Simon Doclo
+</p>
+
+<h2>Abstract</h2>
+<p>
+Own voice pickup for hearables in noisy environments benefits from using both an outer and an in-ear microphone outside and inside the occluded ear. 
+Due to environmental noise recorded at both microphones, and amplification of the own voice at low frequencies and band-limitation at the in-ear microphone, an own voice reconstruction system is needed to enable communication. 
+A large amount of own voice signals is required to train a supervised deep learning-based own voice reconstruction system. Training data can either be obtained by recording a large amount of own voice signals of different talkers with a specific device, which is costly, or through augmentation of available speech data. 
+Own voice signals can be simulated by assuming a linear time-invariant relative transfer function between hearable microphones for each phoneme, referred to as own voice transfer characteristics. 
+In this paper, we propose data augmentation techniques for training an own voice reconstruction system based on speech-dependent models of own voice transfer characteristics between hearable microphones. 
+The proposed techniques use few recorded own voice signals to estimate transfer characteristics and can then be used to simulate a large amount of own voice signals based on single-channel speech signals. 
+Experimental results show that the proposed speech-dependent individual data augmentation technique leads to better performance compared to other data augmentation techniques or compared to training only on the available recorded own voice signals, and additional fine-tuning on the available recorded signals can improve performance further. 
+</p>
+</div>
+
+<h2>Links</h2>
+<p>
+Arxiv preprint: <a href="https://arxiv.org/abs/2405.11592">https://arxiv.org/abs/2405.11592</a>
+</p>
+<p>
+Dataset of German own voice recordings: <a href="https://doi.org/10.5281/zenodo.10844599">https://doi.org/10.5281/zenodo.10844599</a>
+</p>
+<p>
+Transfer function measurements for simulating environmental noise at hearable microphones: <a href="https://doi.org/10.5281/zenodo.11196867">https://doi.org/10.5281/zenodo.11196867</a> 
+</p>
+
+
+
+<h2>Results</h2>
+<div>
+<figure>
+	<img src="lineplot_talkercount_PESQ.svg" alt="PESQ results (talker count).">
+	<figcaption>PESQ improvement over noisy outer microphone signals<br>when reducing the number of talkers.</figcaption>
+</figure>
+<figure>
+	<img src="lineplot_uttamount_PESQ.svg" alt="PESQ results (utterance count).">
+	<figcaption>PESQ improvement over noisy outer microphone signals<br> when reducing the number of utterances per talker.</figcaption>
+</figure>
+</div>
+
+
+<h2>Audio Examples</h2>
+<h3>Diffuse Factory Noise, 5 dB SNR</h3>
+
+<table>
+
+<tr> 
+<td>
+clean outer microphone <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/clean_reference_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+noisy outer microphone <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/noisy_anchor_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+noisy in-ear microphone <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/noisy_inear_0.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded<br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_ff3_bf_ft_jnf_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_bf_ft_jnf_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune full<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_finetune_full_0.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded (3 talkers)<br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_ff3_bf_ft_jnf_3T_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented (3 talkers)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_bf_ft_jnf_3T_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune (3 talkers)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_finetune_3T_0.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded (25 utterances)<br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_ff3_bf_ft_jnf_utt25_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented (25 utterances)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_bf_ft_jnf_utt25_0.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune (25 utterances)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="diffuse_factory_noise_5dBSNR/output_cvde_phone_finetune_utt25_0.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+<table>
+
+
+<h3>Metal Grinder Noise, 0 dB SNR</h3>
+
+<table>
+
+<tr> 
+<td>
+clean outer microphone <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/clean_reference_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+noisy outer microphone <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/noisy_anchor_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+noisy in-ear microphone <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/noisy_inear_1.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded<br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_ff3_bf_ft_jnf_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_bf_ft_jnf_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune full<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_finetune_full_1.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded (3 talkers)<br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_ff3_bf_ft_jnf_3T_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented (3 talkers)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_bf_ft_jnf_3T_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune (3 talkers)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_finetune_3T_1.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+
+<tr> 
+<td>
+only recorded (25 utterances)<br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_ff3_bf_ft_jnf_utt25_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+only augmented (25 utterances)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_bf_ft_jnf_utt25_1.wav" type="audio/x-wav" /></audio>
+</td>
+<td>
+augmented+finetune (25 utterances)<br> (speech-dependent individual) <br>
+<audio controls="controls"><source src="metal_grinder_noise_0dBSNR/output_cvde_phone_finetune_utt25_1.wav" type="audio/x-wav" /></audio>
+</td>
+</tr>
+<table>
+
+
+</body>
+</html>
